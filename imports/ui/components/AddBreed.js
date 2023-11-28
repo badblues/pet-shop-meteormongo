@@ -9,7 +9,7 @@ const AddBreed = () => {
   const [loading, setLoading] = useState(false);
 
   const onSubmit = async (data) => {
-    let breed = {
+    const breed = {
       name: data.name,
     };
     setLoading(true);
@@ -25,7 +25,6 @@ const AddBreed = () => {
     <form onSubmit={handleSubmit(onSubmit)}>
       <div>
         <p>Create breed</p>
-
         <div>
           <label>
             Breed name

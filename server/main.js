@@ -1,8 +1,31 @@
 import { Meteor } from 'meteor/meteor';
+import { Roles } from 'meteor/alanning:roles';
+import { Accounts } from 'meteor/accounts-base';
 import { BreedsCollection } from '/imports/api/breeds';
 
+const roles = ['admin', 'user'];
+
 Meteor.startup(() => {
+  if (Meteor.users.find().count() === 0) {
+    const userId = Accounts.createUser({
+      username: 'admin',
+      password: 'admin',
+    });
+    Roles.addUsersToRoles(userId, 'admin');
+  }
   
+});
+
+Meteor.methods({
+  'user.login'({ username, password }) {
+    const user = Meteor.users.findOne({ username });
+    
+    if (user && Accounts._checkPassword(user, password)) {
+      return true;
+    }
+    
+    return false;
+  },
 });
 
 Meteor.publish("breeds", function () {
@@ -11,7 +34,6 @@ Meteor.publish("breeds", function () {
 
 Meteor.methods({
   'breeds.insert'(breed) {
-    console.log(breed)
     const newBreedId = BreedsCollection.insert(breed);
     return newBreedId;
   }

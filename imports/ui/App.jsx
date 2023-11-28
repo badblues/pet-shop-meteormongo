@@ -1,11 +1,28 @@
 import React from 'react';
-import BreedsList from './components/BreedsList.js';
-import AddBreed from './components/AddBreed.js';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import BreedsPage from './components/BreedsPage.js';
+import BlankPage from './components/BlankPage.js';
+import LoginPage from './components/LoginPage.js'
+import Navbar from './components/Navbar.js';
+import RequireAuth from './components/RequireAuth.js';
 
 export const App = () => (
-  <div>
-    <h1>PETSHOP</h1>
-    <BreedsList/>
-    <AddBreed/>
-  </div>
+  <>
+    <BrowserRouter>
+      <Navbar/>
+      <Routes>
+        <Route path="/" element={<BlankPage/>} exact/>
+        <Route path="/login" element={<LoginPage/>} exact/>
+        <Route
+          element={
+            <RequireAuth
+              allowedRoles={['user', 'admin']}
+            />
+          }
+        >
+          <Route path="/breeds" element={<BreedsPage />} exact />
+        </Route>
+      </Routes>
+    </BrowserRouter>
+  </>
 );
