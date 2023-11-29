@@ -5,13 +5,13 @@ import { Roles } from 'meteor/alanning:roles';
 
 const RequireAuth = ({ allowedRoles }) => {
   const user = useTracker(() => Meteor.user());
-  console.log(user);
+  // console.log(user);
   const userRoles = useTracker(() => {
     // Make sure the user is not null before accessing roles
     return user ? Roles.getRolesForUser(user._id) : [];
   });
 
-  console.log(userRoles);
+  // console.log(userRoles);
 
   return user ? (
     //allowedRoles?.some(role => Roles.userIsInRole(user._id, role)) ? (

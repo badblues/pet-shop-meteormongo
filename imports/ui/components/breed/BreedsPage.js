@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import BreedsList from './BreedsList'
 import AddBreed from './AddBreed'
 import BreedProfile from './BreedProfile'
-import '../../styles/Styles.css'
+import '../../styles/Resource.css'
 
 const BreedsPage = () => {
 

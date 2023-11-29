@@ -1,7 +1,7 @@
 import React from 'react'
 import { useFind, useSubscribe } from 'meteor/react-meteor-data';
 import { BreedsCollection } from '../../../api/breeds';
-import '../../styles/Styles.css'
+import '../../styles/Resource.css'
 
 const BreedsList = ({ onSelect }) => {
   const isLoading = useSubscribe('breeds');
@@ -14,7 +14,7 @@ const BreedsList = ({ onSelect }) => {
   return (
     <div>
       <h2>Breeds:</h2>
-      <div className='breed-list'>
+      <div className='resource-list'>
         {breeds.map(breed => 
           <div
             key={breed._id}
