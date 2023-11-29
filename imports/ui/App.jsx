@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import BreedsPage from './components/breed/BreedsPage.js';
 import ClientsPage from './components/client/ClientsPage.js';
+import EmployeesPage from './components/employee/EmployeesPage.js';
 import BlankPage from './components/BlankPage.js';
 import LoginPage from './components/LoginPage.js'
 import Navbar from './components/Navbar.js';
@@ -32,6 +33,15 @@ export const App = () => (
           }
         >
           <Route path="/clients" element={<ClientsPage />} exact />
+        </Route>
+        <Route
+          element={
+            <RequireAuth
+              allowedRoles={['user', 'admin']}
+            />
+          }
+        >
+          <Route path="/employees" element={<EmployeesPage />} exact />
         </Route>
       </Routes>
     </BrowserRouter>

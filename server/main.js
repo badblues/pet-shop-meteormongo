@@ -3,6 +3,7 @@ import { Roles } from 'meteor/alanning:roles';
 import { Accounts } from 'meteor/accounts-base';
 import { BreedsCollection } from '/imports/api/breeds';
 import { ClientsCollection } from '/imports/api/clients';
+import { EmployeesCollection } from '/imports/api/employees';
 
 const roles = ['admin', 'user'];
 
@@ -78,4 +79,31 @@ Meteor.methods({
     return newClientId;
   }
 });
+
+Meteor.publish("employees", function () {
+  return EmployeesCollection.find();
+});
+
+Meteor.methods({
+  'employees.insert'(employee) {
+    const newEmployeeId = EmployeesCollection.insert(employee);
+    return newEmployeeId;
+  }
+});
+
+Meteor.methods({
+  'employees.update'(employeeId, updatedEmployee) {
+    const result = EmployeesCollection.update({ _id: employeeId }, { $set: updatedEmployee });
+    return result;
+  }
+});
+
+Meteor.methods({
+  'employees.delete'(employeeId) {
+    const newEmployeeId = EmployeesCollection.remove(employeeId);
+    return newEmployeeId;
+  }
+});
+
+
 

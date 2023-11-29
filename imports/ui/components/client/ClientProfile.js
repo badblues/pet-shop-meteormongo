@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import EditClient from './UpdateClient';
+import EditClient from './EditClient';
 
 const ClientProfile = ({ client, onDelete }) => {
 

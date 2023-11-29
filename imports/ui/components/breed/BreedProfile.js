@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import EditBreed from './UpdateBreed';
+import EditBreed from './EditBreed';
 
 const BreedProfile = ({ breed, onDelete }) => {
 

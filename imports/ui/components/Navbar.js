@@ -14,6 +14,9 @@ const Navbar = () => {
       <Link to="/clients">
         CLIENTS
       </Link>
+      <Link to="/employees">
+        EMPLOYEE
+      </Link>
       <LogoutButton/>
     </div>
   )

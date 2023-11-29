@@ -11,9 +11,9 @@ const EmployeesPage = () => {
   return (
     <div className='page'>
       <div className='main-container'>
-        <EmployeesList onSelect={(Employee) => setSelectedEmployee(Employee)}/>
+        <EmployeesList onSelect={(employee) => setSelectedEmployee(employee)}/>
         {selectedEmployee ? (
-          <EmployeeProfile Employee={selectedEmployee} onDelete={() => setSelectedEmployee(null)}/>
+          <EmployeeProfile employee={selectedEmployee} onDelete={() => setSelectedEmployee(null)}/>
           ) : null}
       </div>
       <AddEmployee/>
