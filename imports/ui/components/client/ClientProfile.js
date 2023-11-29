@@ -1,9 +1,13 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import EditClient from './EditClient';
 
 const ClientProfile = ({ client, onDelete }) => {
 
   const [selectedClient, setSelectedClient] = useState(client);
+
+  useEffect(() => {
+    setSelectedClient(client)
+  }, [client]);
 
   const handleDelete = () => {
     Meteor.call('clients.delete', selectedClient._id, (error, result) => {

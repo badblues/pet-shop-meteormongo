@@ -1,9 +1,13 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import EditEmployee from './EditEmployee';
 
 const EmployeeProfile = ({ employee, onDelete }) => {
 
   const [selectedEmployee, setSelectedEmployee] = useState(employee);
+
+  useEffect(() => {
+    setSelectedEmployee(employee);
+  }, [employee]);
 
   const handleDelete = () => {
     Meteor.call('employees.delete', selectedEmployee._id, (error, result) => {

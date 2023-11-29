@@ -4,6 +4,7 @@ import { Accounts } from 'meteor/accounts-base';
 import { BreedsCollection } from '/imports/api/breeds';
 import { ClientsCollection } from '/imports/api/clients';
 import { EmployeesCollection } from '/imports/api/employees';
+import { ApplicationsCollection } from '/imports/api/applications';
 
 const roles = ['admin', 'user'];
 
@@ -104,6 +105,33 @@ Meteor.methods({
     return newEmployeeId;
   }
 });
+
+Meteor.publish("applications", function () {
+  return ApplicationsCollection.find();
+});
+
+Meteor.methods({
+  'applications.insert'(application) {
+    const newApplicationId = ApplicationsCollection.insert(application);
+    return newApplicationId;
+  }
+});
+
+Meteor.methods({
+  'applications.update'(applicationId, updatedApplication) {
+    const result = ApplicationsCollection.update({ _id: applicationId }, { $set: updatedApplication });
+    return result;
+  }
+});
+
+Meteor.methods({
+  'applications.delete'(applicationId) {
+    const newApplicationId = ApplicationsCollection.remove(applicationId);
+    return newApplicationId;
+  }
+});
+
+
 
 
 

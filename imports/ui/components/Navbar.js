@@ -15,7 +15,10 @@ const Navbar = () => {
         CLIENTS
       </Link>
       <Link to="/employees">
-        EMPLOYEE
+        EMPLOYEES
+      </Link>
+      <Link to="/applications">
+        APPLICATIONS
       </Link>
       <LogoutButton/>
     </div>

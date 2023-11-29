@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Meteor } from 'meteor/meteor';
 import { useForm } from "react-hook-form";
 
@@ -7,18 +7,24 @@ const EditBreed = ({ breed, onUpdate }) => {
   const { register, handleSubmit, formState } = useForm();
   const { errors } = formState;
   const [loading, setLoading] = useState(false);
+  const [selectedBreed, setSelectedBreed] = useState(breed);
+
+  useEffect(() => {
+    setSelectedBreed(breed)
+    console.log(breed)
+  }, [breed]);
 
   const onSubmit = (data) => {
     const updatedBreed = {
       name: data.name,
     };
     setLoading(true);
-    Meteor.call('breeds.update', breed._id, updatedBreed, (error, result) => {
+    Meteor.call('breeds.update', selectedBreed._id, updatedBreed, (error, result) => {
       setLoading(false);
       if (error) {
         console.error('Error updating breed:', error);
       } else {
-        updatedBreed._id = breed._id;
+        updatedBreed._id = selectedBreed._id;
         onUpdate(updatedBreed);
       }
     });
@@ -35,7 +41,7 @@ const EditBreed = ({ breed, onUpdate }) => {
           <input
             id="name"
             type="text"
-            defaultValue={breed.name}
+            defaultValue={selectedBreed.name}
             placeholder="Name..."
             autoComplete="off"
             {...register("name", {

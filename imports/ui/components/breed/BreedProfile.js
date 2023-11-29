@@ -1,9 +1,13 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import EditBreed from './EditBreed';
 
 const BreedProfile = ({ breed, onDelete }) => {
 
   const [selectedBreed, setSelectedBreed] = useState(breed);
+
+  useEffect(() => {
+    setSelectedBreed(breed);
+  }, [breed]);
 
   const handleDelete = () => {
     Meteor.call('breeds.delete', selectedBreed._id, (error, result) => {
@@ -24,7 +28,7 @@ const BreedProfile = ({ breed, onDelete }) => {
       </div>
       <div>
         <button onClick={ handleDelete }>DELETE</button>
-        <EditBreed onUpdate={(updatedBreed) => {setSelectedBreed(updatedBreed)}} breed={selectedBreed}/>
+        <EditBreed breed={selectedBreed} onUpdate={(updatedBreed) => {setSelectedBreed(updatedBreed)}}/>
       </div>
     </div>
   )

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-// import ApplicationsList from './ApplicationsList'
-// import AddApplication from './AddApplication'
-// import ApplicationProfile from './ApplicationProfile'
+import ApplicationsList from './ApplicationsList'
+import AddApplication from './AddApplication'
+import ApplicationProfile from './ApplicationProfile'
 import '../../styles/Resource.css'
 
 const ApplicationsPage = () => {
@@ -10,13 +10,13 @@ const ApplicationsPage = () => {
 
   return (
     <div className='page'>
-      {/* <div className='main-container'>
-        <ApplicationsList onSelect={(Application) => setSelectedApplication(Application)}/>
+      <div className='main-container'>
+        <ApplicationsList onSelect={(application) => setSelectedApplication(application)}/>
         {selectedApplication ? (
-          <ApplicationProfile Application={selectedApplication} onDelete={() => setSelectedApplication(null)}/>
+          <ApplicationProfile application={selectedApplication} onDelete={() => setSelectedApplication(null)}/>
           ) : null}
       </div>
-      <AddApplication/> */}
+      <AddApplication/>
     </div>
   )
 }
