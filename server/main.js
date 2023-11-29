@@ -5,6 +5,7 @@ import { BreedsCollection } from '/imports/api/breeds';
 import { ClientsCollection } from '/imports/api/clients';
 import { EmployeesCollection } from '/imports/api/employees';
 import { ApplicationsCollection } from '/imports/api/applications';
+import { CompetitionsCollection } from '/imports/api/competitions';
 
 const roles = ['admin', 'user'];
 
@@ -130,6 +131,33 @@ Meteor.methods({
     return newApplicationId;
   }
 });
+
+Meteor.publish("competitions", function () {
+  return CompetitionsCollection.find();
+});
+
+Meteor.methods({
+  'competitions.insert'(competition) {
+    const newCompetitionId = CompetitionsCollection.insert(competition);
+    return newCompetitionId;
+  }
+});
+
+Meteor.methods({
+  'competitions.update'(competitionId, updatedCompetition) {
+    const result = CompetitionsCollection.update({ _id: competitionId }, { $set: updatedCompetition });
+    return result;
+  }
+});
+
+Meteor.methods({
+  'competitions.delete'(competitionId) {
+    const newCompetitionId = CompetitionsCollection.remove(competitionId);
+    return newCompetitionId;
+  }
+});
+
+
 
 
 

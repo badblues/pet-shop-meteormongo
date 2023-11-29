@@ -11,9 +11,9 @@ const CompetitionsPage = () => {
   return (
     <div className='page'>
       <div className='main-container'>
-        <CompetitionsList onSelect={(Competition) => setSelectedCompetition(Competition)}/>
+        <CompetitionsList onSelect={(competition) => setSelectedCompetition(competition)}/>
         {selectedCompetition ? (
-          <CompetitionProfile Competition={selectedCompetition} onDelete={() => setSelectedCompetition(null)}/>
+          <CompetitionProfile competition={selectedCompetition} onDelete={() => setSelectedCompetition(null)}/>
           ) : null}
       </div>
       <AddCompetition/>

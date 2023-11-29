@@ -20,6 +20,9 @@ const Navbar = () => {
       <Link to="/applications">
         APPLICATIONS
       </Link>
+      <Link to="/competitions">
+        COMPETITIONS
+      </Link>
       <LogoutButton/>
     </div>
   )

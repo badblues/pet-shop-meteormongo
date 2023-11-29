@@ -4,6 +4,7 @@ import BreedsPage from './components/breed/BreedsPage.js';
 import ClientsPage from './components/client/ClientsPage.js';
 import EmployeesPage from './components/employee/EmployeesPage.js';
 import ApplicationsPage from './components/application/ApplicationsPage.js';
+import CompetitionsPage from './components/competition/CompetitionsPage.js';
 import BlankPage from './components/BlankPage.js';
 import LoginPage from './components/LoginPage.js'
 import Navbar from './components/Navbar.js';
@@ -52,6 +53,15 @@ export const App = () => (
           }
         >
           <Route path="/applications" element={<ApplicationsPage />} exact />
+        </Route>
+        <Route
+          element={
+            <RequireAuth
+              allowedRoles={['user', 'admin']}
+            />
+          }
+        >
+          <Route path="/competitions" element={<CompetitionsPage />} exact />
         </Route>
       </Routes>
     </BrowserRouter>
