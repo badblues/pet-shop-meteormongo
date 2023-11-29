@@ -2,21 +2,24 @@ import React, { useState } from 'react';
 import { Meteor } from 'meteor/meteor';
 import { useForm } from "react-hook-form";
 
-const AddBreed = () => {
+const EditBreed = ({ breed, onUpdate }) => {
 
   const { register, handleSubmit, formState } = useForm();
   const { errors } = formState;
   const [loading, setLoading] = useState(false);
 
-  const onSubmit = async (data) => {
-    const breed = {
+  const onSubmit = (data) => {
+    const updatedBreed = {
       name: data.name,
     };
     setLoading(true);
-    Meteor.call('breeds.insert', breed, (error, result) => {
+    Meteor.call('breeds.update', breed._id, updatedBreed, (error, result) => {
       setLoading(false);
       if (error) {
-        console.error('Error inserting breed:', error);
+        console.error('Error updating breed:', error);
+      } else {
+        updatedBreed._id = breed._id;
+        onUpdate(updatedBreed);
       }
     });
   };
@@ -24,14 +27,15 @@ const AddBreed = () => {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div>
-        <p>Create breed</p>
+        <p>EDIT:</p>
         <div>
           <label>
-            Breed name
+            Name:
           </label>
           <input
             id="name"
             type="text"
+            defaultValue={breed.name}
             placeholder="Name..."
             autoComplete="off"
             {...register("name", {
@@ -44,11 +48,11 @@ const AddBreed = () => {
         </div>
 
         <button disabled={loading}>
-          {loading ? "Adding..." : "Add breed"}
+          {loading ? "EDITING..." : "EDIT"}
         </button>
       </div>
     </form>
   )
 }
 
-export default AddBreed
+export default EditBreed

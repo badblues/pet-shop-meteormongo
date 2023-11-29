@@ -39,3 +39,17 @@ Meteor.methods({
   }
 });
 
+Meteor.methods({
+  'breeds.update'(breedId, updatedBreed) {
+    const result = BreedsCollection.update({ _id: breedId }, { $set: updatedBreed });
+    return result;
+  }
+});
+
+Meteor.methods({
+  'breeds.delete'(breedId) {
+    const newBreedId = BreedsCollection.remove(breedId);
+    return newBreedId;
+  }
+});
+

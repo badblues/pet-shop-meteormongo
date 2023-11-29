@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import BreedsPage from './components/BreedsPage.js';
+import BreedsPage from './components/breed/BreedsPage.js';
 import BlankPage from './components/BlankPage.js';
 import LoginPage from './components/LoginPage.js'
 import Navbar from './components/Navbar.js';
