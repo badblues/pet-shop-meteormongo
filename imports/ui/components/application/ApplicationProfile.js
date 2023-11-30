@@ -4,6 +4,7 @@ import EditApplication from './EditApplication';
 const ApplicationProfile = ({ application, onDelete }) => {
 
   const [selectedApplication, setSelectedApplication] = useState(application);
+  console.log(selectedApplication);
 
   useEffect(() => {
     setSelectedApplication(application)
@@ -34,7 +35,7 @@ const ApplicationProfile = ({ application, onDelete }) => {
         <br/>
         <label>Date: {selectedApplication.application_date.toLocaleString()}</label>
         <br/>
-        <label>Completed: {selectedApplication.completed}</label>
+        <label>Completed: {selectedApplication.completed ? "yes" : "no"}</label>
       </div>
       <div>
         <button onClick={ handleDelete }>DELETE</button>

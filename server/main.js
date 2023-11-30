@@ -6,6 +6,7 @@ import { ClientsCollection } from '/imports/api/clients';
 import { EmployeesCollection } from '/imports/api/employees';
 import { ApplicationsCollection } from '/imports/api/applications';
 import { CompetitionsCollection } from '/imports/api/competitions';
+import { AnimalsCollection } from '/imports/api/animals';
 
 const roles = ['admin', 'user'];
 
@@ -45,7 +46,7 @@ Meteor.methods({
 
 Meteor.methods({
   'breeds.update'(breedId, updatedBreed) {
-    const result = BreedsCollection.update({ _id: breedId }, { $set: updatedBreed });
+    const result = BreedsCollection.update({ _id: breedId }, updatedBreed, { replace: true });
     return result;
   }
 });
@@ -70,7 +71,7 @@ Meteor.methods({
 
 Meteor.methods({
   'clients.update'(clientId, updatedClient) {
-    const result = ClientsCollection.update({ _id: clientId }, { $set: updatedClient });
+    const result = ClientsCollection.update({ _id: clientId }, updatedClient, { replace: true });
     return result;
   }
 });
@@ -95,7 +96,7 @@ Meteor.methods({
 
 Meteor.methods({
   'employees.update'(employeeId, updatedEmployee) {
-    const result = EmployeesCollection.update({ _id: employeeId }, { $set: updatedEmployee });
+    const result = EmployeesCollection.update({ _id: employeeId }, updatedEmployee, { replace: true });
     return result;
   }
 });
@@ -120,7 +121,7 @@ Meteor.methods({
 
 Meteor.methods({
   'applications.update'(applicationId, updatedApplication) {
-    const result = ApplicationsCollection.update({ _id: applicationId }, { $set: updatedApplication });
+    const result = ApplicationsCollection.update({ _id: applicationId }, updatedApplication, { replace: true });
     return result;
   }
 });
@@ -145,7 +146,7 @@ Meteor.methods({
 
 Meteor.methods({
   'competitions.update'(competitionId, updatedCompetition) {
-    const result = CompetitionsCollection.update({ _id: competitionId }, { $set: updatedCompetition });
+    const result = CompetitionsCollection.update({ _id: competitionId }, updatedCompetition, { replace: true });
     return result;
   }
 });
@@ -156,6 +157,34 @@ Meteor.methods({
     return newCompetitionId;
   }
 });
+
+Meteor.publish("animals", function () {
+  return AnimalsCollection.find();
+});
+
+Meteor.methods({
+  'animals.insert'(competition) {
+    const newCompetitionId = AnimalsCollection.insert(competition);
+    return newCompetitionId;
+  }
+});
+
+Meteor.methods({
+  'animals.update'(competitionId, updatedCompetition) {
+    const result = AnimalsCollection.update({ _id: competitionId }, updatedCompetition, { replace: true });
+    return result;
+  }
+});
+
+Meteor.methods({
+  'animals.delete'(competitionId) {
+    const newCompetitionId = AnimalsCollection.remove(competitionId);
+    return newCompetitionId;
+  }
+});
+
+
+
 
 
 

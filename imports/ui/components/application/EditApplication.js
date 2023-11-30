@@ -8,6 +8,7 @@ import { BreedsCollection } from '../../../api/breeds';
 
 const EditApplication = ({ application, onUpdate }) => {
 
+  const genderNullStr = "Not important"
   const { register, handleSubmit, formState } = useForm();
   const { errors } = formState;
   const [loading, setLoading] = useState(false);
@@ -24,15 +25,17 @@ const EditApplication = ({ application, onUpdate }) => {
   }, [application]);
 
   const onSubmit = (data) => {
-
-    const updatedApplication = {
+    var updatedApplication = {
       client_id: data.clientId,
       employee_id: data.employeeId,
       breed_id: data.breedId,
       gender: data.gender,
       application_date: selectedApplication.application_date,
-      completed: false
+      completed: data.completed
     };
+    console.log(updatedApplication)
+    if (updatedApplication.gender === genderNullStr)
+      delete updatedApplication.gender
     console.log(updatedApplication)
     setLoading(true);
     Meteor.call('applications.update', selectedApplication._id, updatedApplication, (error, result) => {
@@ -40,6 +43,7 @@ const EditApplication = ({ application, onUpdate }) => {
       if (error) {
         console.error('Error updating application:', error);
       } else {
+        console.log("result: " + result);
         updatedApplication._id = selectedApplication._id;
         updatedApplication.client = clients.find((client) => client._id === updatedApplication.client_id)
         updatedApplication.employee = employees.find((employee) => employee._id === updatedApplication.employee_id)
@@ -48,6 +52,8 @@ const EditApplication = ({ application, onUpdate }) => {
       }
     });
   };
+
+
 
   if (clientsLoading() || employeesLoading() || breedsLoading())
     return (<div>Loading...</div>)
@@ -129,6 +135,7 @@ const EditApplication = ({ application, onUpdate }) => {
             defaultValue={selectedApplication.gender}
             {...register("gender")}
           >
+            <option key={0} value={null}>{genderNullStr}</option>
             <option key={1} value={'male'}>
               MALE
             </option>
@@ -136,6 +143,19 @@ const EditApplication = ({ application, onUpdate }) => {
               FEMALE
             </option>
           </select>
+        </div>
+
+        <div>
+          <label>
+            Completed:
+          </label>
+          <input
+            id="completed"
+            type="checkbox"
+            defaultChecked={selectedApplication.completed}
+            {...register("completed")}
+          >
+          </input>
         </div>
 
         <button disabled={loading}>

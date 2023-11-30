@@ -8,6 +8,7 @@ import { BreedsCollection } from '../../../api/breeds';
 
 const AddApplication = () => {
 
+  const genderNullStr = "Not important"
   const { register, handleSubmit, formState } = useForm();
   const { errors } = formState;
   const [loading, setLoading] = useState(false);
@@ -28,6 +29,9 @@ const AddApplication = () => {
       application_date: new Date(),
       completed: false
     };
+    if (application.gender === genderNullStr)
+      delete application.gender
+    console.log(application)
     setLoading(true);
     Meteor.call('applications.insert', application, (error, result) => {
       setLoading(false);
@@ -111,8 +115,10 @@ const AddApplication = () => {
           </label>
           <select
             id="gender"
+            defaultValue={null}
             {...register("gender")}
           >
+            <option key={0} value={null}>{genderNullStr}</option>
             <option key={1} value={'male'}>
               MALE
             </option>
