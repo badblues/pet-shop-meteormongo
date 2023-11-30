@@ -13,7 +13,7 @@ const AddEmployee = () => {
       name: data.name,
       address: data.address,
       position: data.position,
-      salary: data.salary,
+      salary: parseFloat(data.salary),
     };
     setLoading(true);
     Meteor.call('employees.insert', employee, (error, result) => {

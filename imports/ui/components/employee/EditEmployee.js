@@ -13,7 +13,7 @@ const EditEmployee = ({ employee, onUpdate }) => {
       name: data.name,
       address: data.address,
       position: data.position,
-      salary: data.salary
+      salary: parseFloat(data.salary)
     };
     setLoading(true);
     Meteor.call('employees.update', employee._id, updatedEmployee, (error, result) => {
