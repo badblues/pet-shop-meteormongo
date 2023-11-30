@@ -89,6 +89,7 @@ const AddEmployee = () => {
           <input
             id="salary"
             type="number"
+            step="0.01"
             placeholder="Salary..."
             autoComplete="off"
             {...register("salary", {

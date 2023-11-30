@@ -95,6 +95,7 @@ const EditEmployee = ({ employee, onUpdate }) => {
           <input
             id="salary"
             type="number"
+            step="0.01"
             defaultValue={employee.salary}
             placeholder="Salary..."
             autoComplete="off"
