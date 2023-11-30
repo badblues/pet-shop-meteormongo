@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-// import AnimalsList from './AnimalsList'
-// import AddAnimal from './AddAnimal'
-// import AnimalProfile from './AnimalProfile'
+import AnimalsList from './AnimalsList'
+import AddAnimal from './AddAnimal'
+import AnimalProfile from './AnimalProfile'
 import '../../styles/Resource.css'
 
 const AnimalsPage = () => {
@@ -10,13 +10,13 @@ const AnimalsPage = () => {
 
   return (
     <div className='page'>
-      {/* <div className='main-container'>
-        <AnimalsList onSelect={(Animal) => setSelectedAnimal(Animal)}/>
+      <div className='main-container'>
+        <AnimalsList onSelect={(animal) => setSelectedAnimal(animal)}/>
         {selectedAnimal ? (
-          <AnimalProfile Animal={selectedAnimal} onDelete={() => setSelectedAnimal(null)}/>
+          <AnimalProfile animal={selectedAnimal} onDelete={() => setSelectedAnimal(null)}/>
           ) : null}
       </div>
-      <AddAnimal/> */}
+      <AddAnimal/>
     </div>
   )
 }

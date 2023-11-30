@@ -23,6 +23,9 @@ const Navbar = () => {
       <Link to="/competitions">
         COMPETITIONS
       </Link>
+      <Link to="/animals">
+        ANIMALS
+      </Link>
       <LogoutButton/>
     </div>
   )
